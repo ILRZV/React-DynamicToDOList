@@ -1,0 +1,129 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.App {
+  width: 690px;
+  margin: 40px auto;
+  box-shadow: 5px 5px 5px rgba(106, 106, 106, 0);
+}
+.app_head {
+  background-color: rgb(4, 4, 157);
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  height: 60px;
+  width: 692px;
+  margin-left: -1px;
+  margin-top: -30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.app_head_input {
+  width: 400px;
+  background-color: rgb(53, 53, 221);
+  color: white;
+  font-size: 40px;
+}
+.app_head_counter {
+  color: white;
+  margin-top: -0px;
+  margin-right: 5px;
+  text-align: center;
+  font-size: 40px;
+}
+
+.activeTask {
+  padding: 20px 30px;
+  font-size: 20px;
+  border-left: 3px solid rgb(0, 255, 21);
+  margin-top: 5px;
+  background-color: rgb(236, 235, 235);
+  color: rgb(4, 4, 157);
+}
+.doneTask {
+  padding: 20px 30px;
+  font-size: 20px;
+  border-left: 3px solid red;
+  margin-top: 5px;
+  background-color: rgb(167, 167, 167);
+  color: rgb(84, 84, 84);
+}
+.task_button {
+  float: right;
+  font-size: 20px;
+  height: 20px;
+  border: none;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.input {
+  height: 50px;
+  background-color: rgb(4, 4, 157);
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.input_input {
+  width: 500px;
+  height: 35px;
+  margin: auto;
+  margin-left: 30px;
+  border-radius: 5px;
+  color: rgb(4, 4, 157);
+  font-size: 20px;
+}
+
+.input_button {
+  height: 20px;
+  border: none;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0);
+  font-size: 40px;
+  margin-right: 30px;
+  color: white;
+}
+
+.start {
+  width: 690px;
+  height: 360px;
+  margin: 40px auto;
+  box-shadow: 5px 5px 5px rgba(209, 207, 207, 0.313);
+  background-color: rgba(209, 207, 207, 0.313);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.start_circle {
+  width: 200px;
+  height: 200px;
+  border-radius: 100%;
+  background-color: grey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.start_circle_plus {
+  font-size: 250px;
+  text-align: center;
+  color: white;
+  margin-top: -50px;
+  user-select: none;
+}
