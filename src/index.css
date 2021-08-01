@@ -14,8 +14,9 @@ code {
 
 .App {
   width: 690px;
-  margin: 40px auto;
+  margin: 100px auto;
   box-shadow: 5px 5px 5px rgba(106, 106, 106, 0);
+  padding: 30px;
 }
 .app_head {
   background-color: rgb(4, 4, 157);
@@ -25,28 +26,30 @@ code {
   width: 692px;
   margin-left: -1px;
   margin-top: -30px;
+  margin-bottom: 20px;
   display: flex;
   justify-content: space-between;
+  padding-left: 10px;
 }
 
 .app_head_input {
-  width: 400px;
+  width: 350px;
   background-color: rgb(53, 53, 221);
   color: white;
   font-size: 40px;
 }
 .app_head_counter {
   color: white;
-  margin-top: -0px;
+  margin-top: 0.625em;
   margin-right: 5px;
   text-align: center;
-  font-size: 40px;
+  font-size: 30px;
 }
 
 .activeTask {
   padding: 20px 30px;
   font-size: 20px;
-  border-left: 3px solid rgb(0, 255, 21);
+  border-left: 3px solid rgb(4, 4, 157);
   margin-top: 5px;
   background-color: rgb(236, 235, 235);
   color: rgb(4, 4, 157);
@@ -54,7 +57,7 @@ code {
 .doneTask {
   padding: 20px 30px;
   font-size: 20px;
-  border-left: 3px solid red;
+  border-left: 3px solid rgba(4, 4, 157, 0.476);
   margin-top: 5px;
   background-color: rgb(167, 167, 167);
   color: rgb(84, 84, 84);
@@ -75,6 +78,7 @@ code {
   border-bottom-left-radius: 10px;
   display: flex;
   justify-content: space-between;
+  margin-top: 30px;
 }
 
 .input_input {
@@ -126,4 +130,23 @@ code {
   color: white;
   margin-top: -50px;
   user-select: none;
+}
+
+.delete_button {
+  position: relative;
+  left: 30px;
+  bottom: 40px;
+  width: 40px;
+  height: 40px;
+  background-color: rgb(53, 53, 221);
+  font-size: 30px;
+  border-radius: 100%;
+  cursor: pointer;
+  border: none;
+}
+
+.delete_button > span {
+  color: white;
+  position: relative;
+  top: -2px;
 }

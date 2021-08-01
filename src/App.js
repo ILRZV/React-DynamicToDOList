@@ -7,24 +7,24 @@ class App extends Component {
     super(props);
     this.state = {
       toDoLists: [
-        {
-          id: 0,
-          name: "hello",
-          tasks: [
-            { id: 0, task: "Go for a walk with a dog", isMade: true },
-            { id: 1, task: "Watch a film with friends", isMade: false },
-            { id: 2, task: "Run form troubles", isMade: true },
-          ],
-        },
-        {
-          id: 1,
-          name: "world",
-          tasks: [
-            { id: 0, task: "Make new movee", isMade: true },
-            { id: 1, task: "Answer questions", isMade: false },
-            { id: 2, task: "Make a dinner", isMade: false },
-          ],
-        },
+        // {
+        //   id: 0,
+        //   name: "Monday",
+        //   tasks: [
+        //     { id: 0, task: "Go for a walk with a dog", isMade: true },
+        //     { id: 1, task: "Watch a film", isMade: false },
+        //     { id: 2, task: "New JS tasks", isMade: true },
+        //   ],
+        // },
+        // {
+        //   id: 1,
+        //   name: "world",
+        //   tasks: [
+        //     { id: 0, task: "Make new movee", isMade: true },
+        //     { id: 1, task: "Answer questions", isMade: false },
+        //     { id: 2, task: "Make a dinner", isMade: false },
+        //   ],
+        // },
       ],
     };
   }
@@ -33,12 +33,9 @@ class App extends Component {
     this.setState((state) => {
       let lists = state.toDoLists.slice(0);
       lists.push({
-        name: "pop",
-        tasks: [
-          { id: 0, task: "124142", isMade: true },
-          { id: 1, task: "153135135", isMade: false },
-          { id: 2, task: "122234", isMade: true },
-        ],
+        id: lists.length !== 0 ? lists.length : 0,
+        name: "",
+        tasks: [],
       });
       return { toDoLists: lists };
     });
@@ -47,32 +44,40 @@ class App extends Component {
   updateList = (list) => {
     const id = list.id;
     this.setState((state) => {
-      const lists = state.slice(0);
-      let index = lists.find((element) => element.id == id);
+      let lists = state.toDoLists.slice(0);
+      let index = lists.find((element) => {
+        if (element) {
+          return element.id === id;
+        }
+      }).id;
       lists[index].name = list.name;
-      lists[index].tasks = lists.tasks.slice(0);
+      lists[index].tasks = list.tasks.slice(0);
       return lists;
     });
   };
 
-  addTask = (title) => {
+  deleteList = (id) => {
+    console.log(id);
     this.setState((state) => {
-      let tasks = state.tasks.slice(0);
-      tasks.push({
-        id: tasks.length !== 0 ? tasks.length : 0,
-        task: title,
-        isMade: true,
-      });
-      console.log(tasks);
-      return { tasks: tasks };
+      let lists = state.toDoLists.slice();
+      console.log(lists);
+      delete lists[id];
+      console.log(lists);
+      return { toDoLists: lists };
     });
+    console.log(this.state.toDoLists);
   };
   render() {
     const lists = this.state.toDoLists;
     return (
       <div>
         {lists.map((element) => (
-          <NewList updateList={this.updateList} list={element} />
+          <NewList
+            key={element.id}
+            updateList={this.updateList}
+            deleteList={this.deleteList}
+            list={element}
+          />
         ))}
         <InputList onClick={this.addList} />
       </div>

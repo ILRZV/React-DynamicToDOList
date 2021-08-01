@@ -1,14 +1,11 @@
 import React, { Component } from "react";
 
 class Task extends Component {
-  constructor(props) {
-    super(props);
-  }
   action_button = (isMade) => {
     return isMade ? (
-      <span onClick={this.props.doneTask}>✅</span>
+      <span onClick={this.props.doneTask}>❌</span>
     ) : (
-      <span onClick={this.props.deleteTask}>❌</span>
+      <span onClick={this.props.deleteTask}>🗑️</span>
     );
   };
   render() {

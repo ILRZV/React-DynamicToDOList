@@ -8,47 +8,37 @@ class NewList extends Component {
     this.state = {
       name: "",
       isShownInput: true,
-      tasks: [
-        { id: 0, task: "Make new movee", isMade: true },
-        { id: 1, task: "Answer questions", isMade: false },
-        { id: 2, task: "Make a dinner", isMade: false },
-      ],
     };
   }
   addTask = (title) => {
-    this.setState((state) => {
-      let tasks = state.tasks.slice(0);
-      tasks.push({
-        id: tasks.length !== 0 ? tasks.length : 0,
-        task: title,
-        isMade: true,
-      });
-      console.log(tasks);
-      return { tasks: tasks };
+    let list = this.props.list;
+    list.tasks.push({
+      id: list.tasks.length !== 0 ? list.tasks.length : 0,
+      task: title,
+      isMade: true,
     });
+    this.props.updateList(list);
   };
 
   doneTask = (id) => {
-    let idNumber = this.state.tasks.map((element) => element.id).indexOf(id);
-    console.log(this.state.tasks);
-    this.setState((state) => {
-      let { tasks } = state;
-      tasks[idNumber].isMade = false;
-      return tasks;
-    });
+    let list = this.props.list;
+    let idNumber = list.tasks.map((element) => element.id).indexOf(id);
+    list.tasks[idNumber].isMade = false;
+    this.props.updateList(list);
   };
 
   deleteTask = (id) => {
-    let idNumber = this.state.tasks.map((element) => element.id).indexOf(id);
-    this.setState((state) => {
-      let { tasks } = state;
-      delete tasks[idNumber];
-      return tasks;
-    });
+    let list = this.props.list;
+    let idNumber = list.tasks.map((element) => element.id).indexOf(id);
+    delete list.tasks[idNumber];
+    this.props.updateList(list);
   };
 
   handleEnter = (event) => {
     if (event.key === "Enter") {
+      let list = this.props.list;
+      list.name = this.state.name;
+      this.props.updateList(list);
       this.setState({ name: this.state.name, isShownInput: false });
     }
   };
@@ -56,6 +46,7 @@ class NewList extends Component {
   inputChange = (event) => {
     this.setState({ name: event.target.value });
   };
+
   nameHead(bool) {
     if (bool) {
       return (
@@ -71,19 +62,27 @@ class NewList extends Component {
     }
   }
 
+  deleteList = (id) => {
+    this.props.deleteList(id);
+  };
   render() {
     const tasks = this.props.list.tasks;
     const activeTasks = tasks.filter((element) => element.isMade === true);
     const doneTasks = tasks.filter((element) => element.isMade === false);
-    console.log(this.props.list);
     return (
       <div>
         <div className="App">
           <div className="app_head">
             {this.nameHead(this.state.isShownInput)}
-            <h3 className="app_head_counter">
+            <p className="app_head_counter">
               Active tasks: {activeTasks.length}
-            </h3>
+              <button
+                className="delete_button"
+                onClick={() => this.deleteList(this.props.list.id)}
+              >
+                <span>✖</span>
+              </button>
+            </p>
           </div>
 
           {activeTasks.map((element) => (
