@@ -1,4 +1,7 @@
-# Getting Started with Create React App
+# ToDo list
+## I made basic from video and then modified to be expandable
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
