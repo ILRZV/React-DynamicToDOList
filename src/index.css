@@ -12,6 +12,16 @@ code {
     monospace;
 }
 
+.body {
+  background-color: white;
+  position: absolute;
+  min-height: 100%;
+  width: 100%;
+}
+.theme_button {
+  position: absolute;
+  z-index: 1000;
+}
 .App {
   width: 690px;
   margin: 100px auto;
@@ -29,7 +39,6 @@ code {
   margin-bottom: 20px;
   display: flex;
   justify-content: space-between;
-  padding-left: 10px;
 }
 
 .app_head_input {
@@ -105,7 +114,6 @@ code {
   width: 690px;
   height: 360px;
   margin: 40px auto;
-  box-shadow: 5px 5px 5px rgba(209, 207, 207, 0.313);
   background-color: rgba(209, 207, 207, 0.313);
   display: flex;
   justify-content: center;
@@ -149,4 +157,32 @@ code {
   color: white;
   position: relative;
   top: -2px;
+}
+
+.line_throught {
+  text-decoration: line-through;
+}
+
+.dark_theme_active_task {
+  background-color: rgb(2, 2, 76);
+  color: white;
+}
+
+.dark_theme_done_task {
+  background-color: rgb(0, 0, 0);
+}
+
+.dark_theme_background {
+  background-color: rgb(5, 5, 20);
+}
+.light_theme_background {
+  background-color: white;
+}
+
+.dark_theme_list {
+  background-color: rgb(1, 1, 91);
+}
+
+.control_panel {
+  background-color: rgb(47, 47, 224);
 }

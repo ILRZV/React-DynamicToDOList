@@ -1,6 +1,9 @@
 import { Component } from "react";
 import InputList from "./Components/InputList";
 import NewList from "./Components/List";
+import React from "react";
+import Context from "./Components/ThemeContext";
+import SwitchBox from "./Components/Switch";
 
 class App extends Component {
   constructor(props) {
@@ -26,6 +29,7 @@ class App extends Component {
         //   ],
         // },
       ],
+      theme: "dark",
     };
   }
 
@@ -67,20 +71,38 @@ class App extends Component {
     });
     console.log(this.state.toDoLists);
   };
+
+  changeColor = () => {
+    this.setState({
+      theme: this.state.theme === "dark" ? "light" : "dark",
+    });
+  };
   render() {
     const lists = this.state.toDoLists;
+    const classes = [];
+    if (this.state.theme === "dark") {
+      classes.push("dark_theme_background");
+    } else {
+      classes.push("light_theme_background");
+    }
     return (
-      <div>
-        {lists.map((element) => (
-          <NewList
-            key={element.id}
-            updateList={this.updateList}
-            deleteList={this.deleteList}
-            list={element}
-          />
-        ))}
-        <InputList onClick={this.addList} />
-      </div>
+      <Context.Provider value={{ theme: this.state.theme }}>
+        <div className="control_panel">
+          <SwitchBox onChange={this.changeColor}></SwitchBox>
+          <span style={{ color: "white" }}>Change Color</span>
+        </div>
+        <div className={classes.join(" ") + " body"}>
+          {lists.map((element) => (
+            <NewList
+              key={element.id}
+              updateList={this.updateList}
+              deleteList={this.deleteList}
+              list={element}
+            />
+          ))}
+          <InputList onClick={this.addList} />
+        </div>
+      </Context.Provider>
     );
   }
 }
