@@ -16,7 +16,8 @@ code {
   background-color: white;
   position: absolute;
   min-height: 100%;
-  width: 100%;
+  box-sizing: border-box;
+  min-width: 100%;
 }
 .theme_button {
   position: absolute;
@@ -33,12 +34,12 @@ code {
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
   height: 60px;
-  width: 692px;
   margin-left: -1px;
   margin-top: -30px;
   margin-bottom: 20px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .app_head_input {
@@ -51,8 +52,11 @@ code {
   color: white;
   margin-top: 0.625em;
   margin-right: 5px;
-  text-align: center;
   font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px 10px;
 }
 
 .activeTask {
@@ -62,6 +66,7 @@ code {
   margin-top: 5px;
   background-color: rgb(236, 235, 235);
   color: rgb(4, 4, 157);
+  word-wrap: break-word;
 }
 .doneTask {
   padding: 20px 30px;
@@ -70,6 +75,7 @@ code {
   margin-top: 5px;
   background-color: rgb(167, 167, 167);
   color: rgb(84, 84, 84);
+  word-wrap: break-word;
 }
 .task_button {
   float: right;
@@ -113,7 +119,7 @@ code {
 .start {
   width: 690px;
   height: 360px;
-  margin: 40px auto;
+  margin: 100px auto;
   background-color: rgba(209, 207, 207, 0.313);
   display: flex;
   justify-content: center;
@@ -136,7 +142,6 @@ code {
   font-size: 250px;
   text-align: center;
   color: white;
-  margin-top: -50px;
   user-select: none;
 }
 
@@ -185,4 +190,8 @@ code {
 
 .control_panel {
   background-color: rgb(47, 47, 224);
+  position: fixed;
+  z-index: 2;
+  box-sizing: border-box;
+  min-width: 100%;
 }

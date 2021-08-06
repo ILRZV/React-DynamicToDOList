@@ -13,11 +13,7 @@ function InputTask(props) {
   }
 
   function inputChange(event) {
-    if (event.target.value.length < 50) {
-      setInput(event.target.value);
-    } else {
-      event.target.value = event.target.value.slice(0, 20);
-    }
+    setInput(event.target.value);
   }
   const classes = [];
   if (useContext(Context).theme === "dark") {

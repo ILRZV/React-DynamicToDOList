@@ -1,5 +1,4 @@
-import React, { useContext } from "react";
-import Context from "./ThemeContext";
+import React from "react";
 
 function InputList(props) {
   return (

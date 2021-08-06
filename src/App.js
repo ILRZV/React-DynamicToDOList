@@ -1,110 +1,105 @@
-import { Component } from "react";
-import InputList from "./Components/InputList";
-import NewList from "./Components/List";
+import { Component, useState } from "react";
 import React from "react";
+import ToDoApp from "./ToDoApp";
 import Context from "./Components/ThemeContext";
-import SwitchBox from "./Components/Switch";
+import Menu from "./Components/Menu";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      toDoLists: [
-        // {
-        //   id: 0,
-        //   name: "Monday",
-        //   tasks: [
-        //     { id: 0, task: "Go for a walk with a dog", isMade: true },
-        //     { id: 1, task: "Watch a film", isMade: false },
-        //     { id: 2, task: "New JS tasks", isMade: true },
-        //   ],
-        // },
-        // {
-        //   id: 1,
-        //   name: "world",
-        //   tasks: [
-        //     { id: 0, task: "Make new movee", isMade: true },
-        //     { id: 1, task: "Answer questions", isMade: false },
-        //     { id: 2, task: "Make a dinner", isMade: false },
-        //   ],
-        // },
-      ],
-      theme: "dark",
-    };
-  }
+function App() {
+  const [state, setState] = useState({ theme: "light" });
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [openPage, setOpenPage] = useState("Tasks");
+  const [toDoLists, setToDoLists] = useState([
+    // {
+    //   id: 0,
+    //   name: "Monday",
+    //   tasks: [
+    //     { id: 0, task: "Go for a walk with a dog", isMade: true },
+    //     { id: 1, task: "Watch a film", isMade: false },
+    //     { id: 2, task: "New JS tasks", isMade: true },
+    //   ],
+    // },
+    // {
+    //   id: 1,
+    //   name: "world",
+    //   tasks: [
+    //     { id: 0, task: "Make new movee", isMade: true },
+    //     { id: 1, task: "Answer questions", isMade: false },
+    //     { id: 2, task: "Make a dinner", isMade: false },
+    //   ],
+    // },
+  ]);
 
-  addList = () => {
-    this.setState((state) => {
-      let lists = state.toDoLists.slice(0);
-      lists.push({
-        id: lists.length !== 0 ? lists.length : 0,
-        name: "",
-        tasks: [],
-      });
-      return { toDoLists: lists };
+  let addList = () => {
+    let lists = toDoLists.slice(0);
+    lists.push({
+      id: lists.length !== 0 ? lists.length : 0,
+      name: "",
+      tasks: [],
     });
+    setToDoLists(lists);
   };
 
-  updateList = (list) => {
+  let updateList = (list) => {
     const id = list.id;
-    this.setState((state) => {
-      let lists = state.toDoLists.slice(0);
-      let index = lists.find((element) => {
-        if (element) {
-          return element.id === id;
-        }
-      }).id;
-      lists[index].name = list.name;
-      lists[index].tasks = list.tasks.slice(0);
-      return lists;
-    });
+    let lists = toDoLists.slice(0);
+    let index = lists.find((element) => {
+      if (element) {
+        return element.id === id;
+      }
+      return false;
+    }).id;
+    lists[index].name = list.name;
+    lists[index].tasks = list.tasks.slice(0);
+    setToDoLists(lists);
   };
 
-  deleteList = (id) => {
-    console.log(id);
-    this.setState((state) => {
-      let lists = state.toDoLists.slice();
-      console.log(lists);
-      delete lists[id];
-      console.log(lists);
-      return { toDoLists: lists };
-    });
-    console.log(this.state.toDoLists);
+  let deleteList = (id) => {
+    let lists = toDoLists.slice();
+    delete lists[id];
+    setToDoLists(lists);
   };
 
-  changeColor = () => {
-    this.setState({
-      theme: this.state.theme === "dark" ? "light" : "dark",
+  function changeColor() {
+    setState({
+      theme: state.theme === "dark" ? "light" : "dark",
     });
-  };
-  render() {
-    const lists = this.state.toDoLists;
-    const classes = [];
-    if (this.state.theme === "dark") {
-      classes.push("dark_theme_background");
-    } else {
-      classes.push("light_theme_background");
-    }
-    return (
-      <Context.Provider value={{ theme: this.state.theme }}>
-        <div className="control_panel">
-          <SwitchBox onChange={this.changeColor}></SwitchBox>
-          <span style={{ color: "white" }}>Change Color</span>
-        </div>
-        <div className={classes.join(" ") + " body"}>
-          {lists.map((element) => (
-            <NewList
-              key={element.id}
-              updateList={this.updateList}
-              deleteList={this.deleteList}
-              list={element}
-            />
-          ))}
-          <InputList onClick={this.addList} />
-        </div>
-      </Context.Provider>
-    );
   }
+
+  const handleDrawerOpen = () => {
+    setIsMenuOpen(true);
+  };
+  const handleDrawerClose = () => {
+    setIsMenuOpen(false);
+  };
+
+  function changePage(title) {
+    setOpenPage(title);
+  }
+  return (
+    <div>
+      <Menu
+        changeColor={changeColor}
+        open={isMenuOpen}
+        handleDrawerClose={handleDrawerClose}
+        handleDrawerOpen={handleDrawerOpen}
+        changePage={changePage}
+      />
+      {openPage === "Tasks" ? (
+        <Context.Provider value={{ theme: state.theme }}>
+          <ToDoApp
+            theme={state.theme}
+            onClick={handleDrawerClose}
+            toDoLists={toDoLists}
+            addList={addList}
+            updateList={updateList}
+            deleteList={deleteList}
+          />
+        </Context.Provider>
+      ) : (
+        <div></div>
+      )}
+    </div>
+  );
 }
 
 export default App;

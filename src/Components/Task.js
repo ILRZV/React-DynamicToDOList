@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { ThemeContext } from "./ThemeContext";
 import Context from "./ThemeContext";
 
 function Task(props) {
